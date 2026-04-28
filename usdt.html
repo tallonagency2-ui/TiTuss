@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <title>USDT UI</title>
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                -webkit-tap-highlight-color: transparent;
+                font-family: 'Inter', sans-serif;
+            }
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                /* background: #2f3a4c; */
+            }
+            body {
+                display: flex;
+                justify-content: center;
+            }
+            button,
+            a {
+                border: 0;
+                outline: 0;
+                background: none;
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .app {
+                width: 100%;
+                max-width: 430px;
+                height: 100dvh;
+                background: #f4f5fa;
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .page-scroll {
+                flex: 1;
+                overflow-y: auto;
+                overflow-x: hidden;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+            }
+            .page-scroll::-webkit-scrollbar {
+                display: none;
+            }
+
+            .header {
+                height: 56px;
+                padding: 18px 16px 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .header i {
+                    font-size: 31px;
+                     color: #3a3a3e;
+            }
+            .header-title {
+                font-size: 18px;
+                font-weight: 500;
+                color: #3a3a3e;
+            }
+/* ICON CHUNG */
+.header img {
+           width: 73px;
+    height: 77px;
+    /* object-fit: contain; */
+    margin-right: -26px;
+}
+
+/* nếu muốn chỉnh riêng từng icon */
+.icon-back {
+    width: 22px;
+}
+
+.icon-info {
+    width: 20px;
+}
+            .balance {
+                padding: 28px 16px 24px;
+            }
+            .balance-top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .coin {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .coin-logo-wrap {
+                width: 34px;
+                height: 34px;
+                position: relative;
+            }
+            .coin-logo {
+                width: 102px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: -33px;
+    margin-top: -11px;
+            }
+            .chain {
+                position: absolute;
+                left: 4px;
+                bottom: 1px;
+                font-size: 6px;
+                color: #fff;
+                background: rgba(0, 0, 0, 0.45);
+                padding: 0 2px;
+                border-radius: 3px;
+            }
+            .coin-name-row {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+            .copy-icon-img {
+        width: 58px;
+    height: 47px;
+    object-fit: contain;
+    opacity: 0.6;
+    margin-left: -14px;
+}
+            .coin-name {
+                font-size: 16px;
+                font-weight: 600;
+                color: #3a3a3e;
+            }
+            .copy-icon {
+                font-size: 14px;
+                color: #a7a9b1;
+            }
+
+            .amount {
+                text-align: right;
+            }
+            .amount h2 {
+                font-size: 19px;
+                font-weight: 500;
+                color: #3a3a3e;
+                    font-weight: 600;
+            }
+            .amount span {
+                font-size: 12px;
+                color: #9c9fa8;
+            }
+
+            .market {
+    margin: 12px 16px;
+    height: 56px;
+
+    background: #fff;
+    border-radius: 14px;
+
+    padding: 0 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LEFT */
+.market-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #3a3a3e;
+}
+
+/* RIGHT */
+.market-right {
+      display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-right: -7px;
+}
+
+/* PRICE */
+.market-price {
+    text-align: right;
+    line-height: 1.2;
+}
+
+.market-price strong {
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    color: #3a3a3e;
+}
+
+.market-price span {
+    font-size: 11px;
+    color: #9c9fa8;
+}
+
+/* % BOX */
+.percent {
+    min-width: 48px;
+    height: 24px;
+
+    background: #bfc4ca;
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+}
+
+/* ARROW */
+.arrow-icon {
+    width: 14px;
+    height: 14px;
+    opacity: 0.6;
+}
+            .percent {
+               width: 67px;
+    height: 31px;
+    border-radius: 5px;
+    background: #bfc4ca;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    margin-left: -4px;
+    justify-content: center;
+            }
+
+            .tabs {
+                height: 58px;
+                padding: 0 16px;
+                display: flex;
+                align-items: center;
+                gap: 28px;
+                font-weight: 500;
+            }
+            .tab {
+                font-size: 15px;
+                color: #9b9ea7;
+                position: relative;
+            }
+            .tab.active {
+                color: #3a3a3e;
+            }
+            .tab.active::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: -12px;
+                width: 22px;
+                height: 2px;
+                background: #111318;
+                border-radius: 99px;
+            }
+            .filter-icon {
+                margin-left: auto;
+                font-size: 24px;
+            }
+
+            .list {
+                margin: 0 16px;
+                background: #fff;
+                border-radius: 12px 12px 0 0;
+                overflow: hidden;
+            }
+
+            .item {
+                min-height: 58px;
+                padding: 8px 14px;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                position: relative;
+                gap: 8px;
+            }
+            .item::after {
+                content: '';
+                position: absolute;
+                left: 58px;
+                right: 0;
+                bottom: 0;
+                height: 1px;
+                background: #eeeeef;
+            }
+
+            .left {
+                flex: 1;
+                display: flex;
+                gap: 11px;
+                min-width: 0;
+            }
+
+            .tx-icon {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                flex-shrink: 0;
+            }
+            .tx-icon i {
+                font-size: 23px;
+                transform: rotate(45deg);
+            }
+            .send {
+                background: #53c69d;
+            }
+            .receive {
+                background:#2c80fd;
+            }
+
+            .addr-row {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+            .addr {
+             max-width: 145px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3a3a3e;
+            }
+            .addr-copy {
+                font-size: 13px;
+                color: #a7a9b1;
+            }
+            .type {
+                font-size: 11px;
+                color: #9b9ea7;
+                margin-top: 3px;
+                font-weight: 500;
+            }
+
+            .right {
+                width: 116px;
+                text-align: right;
+            }
+            .tx-amount {
+                font-size: 13px;
+                font-weight: 700;
+                white-space: nowrap;
+            }
+            .pos {
+                color: #1d7aff;
+            }
+            .neg {
+                color:#00a684;
+            }
+            .time {
+                font-size: 10px;
+                color: #9b9ea7;
+                margin-top: 4px;
+                white-space: nowrap;
+            }
+
+            .footer {
+             position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 42px 15px 25px;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 58px;
+    gap: 9px;
+    z-index: 20;
+    background: white;
+            }
+
+            .btn {
+                /* height: 42px; */
+                border-radius: 9px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 7px;
+                font-size: 14px;
+                font-weight: 700;
+                color: #fff;
+            }
+            .btn i {
+                font-size: 21px;
+            }
+            .btn-send {
+                background:#53c69d;
+            }
+            .btn-receive {
+                background:#2c80fd;
+            }
+            .btn-swap {
+                background: #f2f3f5;
+                color: #111318;
+                flex-direction: column;
+                gap: 0;
+                font-size: 10px;
+            }
+            /* ICON CHUNG */
+            .icon-send{
+     width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+.btn img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+.btn .icon-send{
+     width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+.btn .icon-receive{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+.btn span {
+    transform: translateX(5px);
+}
+
+/* ICON SWAP NHỎ HƠN */
+.btn-swap img {
+      width: 63px;
+    height: 83px;
+        margin-top: -29px;
+}
+.btn-swap {
+        width: 59px;
+    height: 51px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* gap: 2px; */
+    margin-left: -4px;
+}
+/* ICON */
+.icon-swap {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+/* TEXT */
+.btn-swap span {
+    font-size: 10px;
+    color: #111;
+        margin-top: -29px;
+}
+        </style>
+    </head>
+
+    <body>
+        <div class="app">
+            <div class="page-scroll" id="appScroll">
+                <header class="header">
+                    <a href="index.html"><i class="bx bx-chevron-left"></i></a>
+                    <div class="header-title">Tether USD</div>
+                      <img src="img/images/info.png" class="icon-info">
+                </header>
+
+                <section class="balance">
+                    <div class="balance-top">
+                        <div class="coin">
+
+    <div class="coin-logo-wrap">
+
+        <div class="img-trc20">
+        <img class="coin-logo" src="img/images/TRC20.png" />
+        </div>
+       
+        <!-- <div class="chain">TRC20</div> -->
+    </div>
+
+    <div class="coin-name-row">
+        <div class="coin-name">USDT</div>
+        <img src="img/images/copy.png" class="copy-icon-img">
+    </div>
+</div>
+
+                        <div class="amount">
+                            <h2>2.88081</h2>
+                            <span>$2.88</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="market">
+                    <div class="market-title">Price & Market</div>
+                    <div class="market-right">
+                        <div class="market-price">
+                            <strong>1.0000</strong>
+                            <span>$1.0000</span>
+                        </div>
+                        <div class="percent">0%</div>
+                       <i class="bx bx-chevron-right" style="font-size: 25px; color: #3a3a3e;"></i>
+                    </div>
+                </section>
+
+                <section class="tabs">
+                    <div class="tab active">All</div>
+                    <div class="tab">In</div>
+                    <div class="tab">Out</div>
+                    <i class="bx bx-filter-alt filter-icon"></i>
+                </section>
+
+                <section class="list">
+                    <script>
+                        const data = [
+                            ['send', '5bf98d...9abe80', 'Send', '-80 USDT', '04/12 20:43:57'],
+                            ['receive', 'THCR8C...z6C3y1', 'Receive', '+80 USDT', '04/12 20:43:03'],
+                            ['send', 'TWbcbZ...a2aZyn', 'Send', '-90 USDT', '04/11 23:41:33'],
+                            ['send', 'TWbcbZ...a2aZyn', 'Send', '-100 USDT', '04/11 02:08:36'],
+                            ['receive', 'TFyqiC...zummvH', 'Receive', '+184.996911 USDT', '04/11 02:04:51'],
+                            ['send', 'TWbcbZ...a2aZyn', 'Send', '-120 USDT', '04/09 02:04:48'],
+                            ['receive', 'Vip 2', 'Receive', '+47.883899 USDT', '04/09 02:03:36'],
+                            ['send', 'TUeJ99...nBYhL3', 'Send', '-20 USDT', '04/08 21:18:32'],
+                             ['send', 'TUeJ99...nBYhL3', 'Send', '-20 USDT', '04/08 21:18:32'],
+                        ];
+
+                        document.write(
+                            data
+                                .map(
+                                    (e) => `
+<div class="item">
+    <div class="left">
+        <div class="tx-icon ${e[0]}">
+            <i class="bx ${e[0] === 'send' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt'}"></i>
+        </div>
+
+        <div>
+            <div class="addr-row">
+                <div class="addr">${e[1]}</div>
+                <i class="bx bx-copy addr-copy"></i>
+            </div>
+
+            <div class="type">${e[2]}</div>
+        </div>
+    </div>
+
+    <div class="right">
+        ${
+            e[0] === 'send'
+                ? `<a href="tx-detail.html" class="tx-amount neg">${e[3]}</a>`
+                : `<div class="tx-amount pos">${e[3]}</div>`
+        }
+        <div class="time">${e[4]}</div>
+    </div>
+</div>
+`,
+                                )
+                                .join(''),
+                        );
+                    </script>
+                </section>
+            </div>
+
+                           <footer class="footer">
+    <button class="btn btn-send">
+        <img src="img/images/send.png" class="icon-send">
+        <div class="text-send" style="    margin-left: -14px;">
+                 <span>Send</span>
+        </div>
+     
+    </button>
+
+    <button class="btn btn-receive">
+        <img src="img/images/receive.png" class="icon-receive">
+         <div class="text-receive" style="    margin-left: -14px;">
+                   <span>Receive</span>
+        </div>
+    
+    </button>
+
+    <button class="btn-swap">
+        <img src="img/images/swap.png" class="icon-swap">
+        <span>Swap</span>
+    </button>
+</footer>
+        </div>
+    </body>
+</html>
